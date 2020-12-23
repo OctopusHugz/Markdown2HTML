@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""This module parses Markdown and converts it to HTML"""
 from sys import argv, exit, stderr
 from os import path
 
