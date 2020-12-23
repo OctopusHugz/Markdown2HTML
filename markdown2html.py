@@ -15,14 +15,17 @@ if __name__ == "__main__":
     line_array = []
     for line in file_content:
         header_level = line.count("#")
-        header_tag = "<h" + str(header_level) + ">"
-        closing_header_tag = "</h" + str(header_level) + ">"
         line_content = line.split()
-        element_text = line_content[1:]
-        element_text_string = " ".join(element_text)
-        full_element_string = header_tag + element_text_string + \
-            closing_header_tag
-        line_array.append(full_element_string)
+        if header_level != 0:
+            header_tag = "<h" + str(header_level) + ">"
+            closing_header_tag = "</h" + str(header_level) + ">"
+            element_text = line_content[1:]
+            element_text_string = " ".join(element_text)
+            full_element_string = header_tag + element_text_string + \
+                closing_header_tag
+            line_array.append(full_element_string)
+        else:
+            line_array.append(" ".join(line_content))
     with open(argv[2], "w") as f:
         for line in line_array:
             f.write(line)
