@@ -44,9 +44,9 @@ if __name__ == "__main__":
         for line in file_content:
             line_content = line.split()
             header_level = line.count("#")
-            print("\nline is: {}".format(line))
-            print("line[0] is: {}".format(line[0]))
-            print("ul_flag is: {}".format(ul_flag))
+            # print("\nline is: {}".format(line))
+            # print("line[0] is: {}".format(line[0]))
+            # print("ul_flag is: {}".format(ul_flag))
             if header_level != 0:
                 if ul_flag > 0:
                     # f.write(str(ul_items.get(ul_elems)))
