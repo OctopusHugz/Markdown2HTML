@@ -23,7 +23,7 @@ if __name__ == "__main__":
         full_element_string = header_tag + element_text_string + \
             closing_header_tag
         line_array.append(full_element_string)
-    with open(argv[2], "w+") as f:
+    with open(argv[2], "w") as f:
         for line in line_array:
             f.write(line)
             f.write("\n")
