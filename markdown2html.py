@@ -21,6 +21,15 @@ def write_ul_list(my_list):
     return full_list_string
 
 
+def write_ol_list(my_list):
+    list_string = "<ol>"
+    list_closing_tag = "</ol>"
+    for li in my_list:
+        list_string += "<li>" + " ".join(li) + "</li>"
+    full_list_string = list_string + list_closing_tag
+    return full_list_string
+
+
 if __name__ == "__main__":
     from sys import argv, exit, stderr
     from os import path
@@ -34,8 +43,9 @@ if __name__ == "__main__":
     with open(argv[1]) as f:
         file_content = f.readlines()
     ul_items = {}
-    ul_li_list = []
     ol_items = {}
+    ul_li_list = []
+    ol_li_list = []
     ul_flag = 0
     ol_flag = 0
     ul_elems = 0
@@ -68,26 +78,27 @@ if __name__ == "__main__":
                 ul_li_list = []
                 ul_flag = 0
                 f.write(line)
+            elif line[0] == "*" and ol_flag >= 0:
+                ol_flag += 1
+                ol_li_list.append(line_content[1:])
+                ol_items.update({ol_elems: ol_li_list})
+            elif line[0] != "*" and ol_flag > 0:
+                print("Found the end of ol!")
+                f.write(write_ol_list(ol_items.get(ol_elems)))
+                f.write("\n")
+                ul_elems += 1
+                ul_li_list = []
+                ol_flag = 0
+                f.write(line)
             else:
                 f.write(line)
             if index == len(file_content) - 1:
                 if ul_flag > 0:
+                    print("Found the end of ul!")
                     f.write(write_ul_list(ul_items.get(ul_elems)))
                     f.write("\n")
+                elif ol_flag > 0:
+                    print("Found the end of ol!")
+                    f.write(write_ol_list(ol_items.get(ol_elems)))
+                    f.write("\n")
             index += 1
-    # print(ul_items)
-
-# if "*" in line and ol_flag == 0:
-#     ol_flag = 1
-#     ol_items.update({ol_elems: line_content[1:]})
-# elif "*" in line and ol_flag >= 1:
-#     ol_flag += 1
-#     ol_items.update({ol_elems: line_content[1:]})
-# elif "*" not in line and ol_flag > 0:
-#     ol_flag = 0
-#     ol_elems += 1
-
-# with open(argv[2], "w") as f:
-#     for line in line_array:
-#         f.write(line)
-#         f.write("\n")
