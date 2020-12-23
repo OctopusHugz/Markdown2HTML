@@ -77,7 +77,6 @@ if __name__ == "__main__":
                 ul_li_list.append(line_content[1:])
                 ul_items.update({ul_elems: ul_li_list})
             elif line[0] != "-" and ul_flag > 0:
-                print("Found the end of ul!")
                 f.write(write_ul_list(ul_items.get(ul_elems)))
                 f.write("\n")
                 ul_elems += 1
@@ -89,7 +88,6 @@ if __name__ == "__main__":
                 ol_li_list.append(line_content[1:])
                 ol_items.update({ol_elems: ol_li_list})
             elif line[0] != "*" and ol_flag > 0:
-                print("Found the end of ol!")
                 f.write(write_ol_list(ol_items.get(ol_elems)))
                 f.write("\n")
                 ol_elems += 1
@@ -100,11 +98,9 @@ if __name__ == "__main__":
                 f.write(line)
             if index == len(file_content) - 1:
                 if ul_flag > 0:
-                    print("Found the end of ul!")
                     f.write(write_ul_list(ul_items.get(ul_elems)))
                     f.write("\n")
                 elif ol_flag > 0:
-                    print("Found the end of ol!")
                     f.write(write_ol_list(ol_items.get(ol_elems)))
                     f.write("\n")
             index += 1
