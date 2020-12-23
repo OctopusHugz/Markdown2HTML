@@ -92,8 +92,8 @@ if __name__ == "__main__":
                 print("Found the end of ol!")
                 f.write(write_ol_list(ol_items.get(ol_elems)))
                 f.write("\n")
-                ul_elems += 1
-                ul_li_list = []
+                ol_elems += 1
+                ol_li_list = []
                 ol_flag = 0
                 f.write(line)
             else:
