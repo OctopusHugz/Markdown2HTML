@@ -40,6 +40,7 @@ if __name__ == "__main__":
     ol_flag = 0
     ul_elems = 0
     ol_elems = 0
+    index = 0
     with open(argv[2], "w") as f:
         for line in file_content:
             line_content = line.split()
@@ -49,7 +50,6 @@ if __name__ == "__main__":
             # print("ul_flag is: {}".format(ul_flag))
             if header_level != 0:
                 if ul_flag > 0:
-                    # f.write(str(ul_items.get(ul_elems)))
                     f.write(write_ul_list(ul_items.get(ul_elems)))
                     f.write("\n")
                     ul_elems += 1
@@ -61,6 +61,7 @@ if __name__ == "__main__":
                 ul_li_list.append(line_content[1:])
                 ul_items.update({ul_elems: ul_li_list})
             elif line[0] != "-" and ul_flag > 0:
+                print("Found the end of ul!")
                 f.write(write_ul_list(ul_items.get(ul_elems)))
                 f.write("\n")
                 ul_elems += 1
@@ -69,6 +70,11 @@ if __name__ == "__main__":
                 f.write(line)
             else:
                 f.write(line)
+            if index == len(file_content) - 1:
+                if ul_flag > 0:
+                    f.write(write_ul_list(ul_items.get(ul_elems)))
+                    f.write("\n")
+            index += 1
     # print(ul_items)
 
 # if "*" in line and ol_flag == 0:
