@@ -22,7 +22,8 @@ if __name__ == "__main__":
         line_content[index] = header_tag
         element_text = line_content[1:]
         element_text_string = " ".join(element_text)
-        full_element_string = header_tag + element_text_string + closing_header_tag + "\n"
+        full_element_string = header_tag + element_text_string + \
+            closing_header_tag + "\n"
         line_array.append(full_element_string)
     with open(argv[2], "w+") as f:
         for line in line_array:
