@@ -65,6 +65,12 @@ if __name__ == "__main__":
                     ul_elems += 1
                     ul_li_list = []
                     ul_flag = 0
+                elif ol_flag > 0:
+                    f.write(write_ol_list(ol_items.get(ol_elems)))
+                    f.write("\n")
+                    ol_elems += 1
+                    ol_li_list = []
+                    ol_flag = 0
                 f.write(write_headers(line_content, header_level))
             elif line[0] == "-" and ul_flag >= 0:
                 ul_flag += 1
