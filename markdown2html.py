@@ -46,6 +46,7 @@ def write_p_lines(p_lines):
     full_list_string = list_string + list_closing_tag
     return full_list_string
 
+
 if __name__ == "__main__":
     from sys import argv, exit, stderr
     from os import path
