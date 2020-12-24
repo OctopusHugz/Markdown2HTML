@@ -39,7 +39,7 @@ def write_p_lines(p_lines):
             list_string += line
         else:
             if index != len(p_lines) - 1:
-                list_string += line + " <br/> "
+                list_string += line + "<br/>"
             else:
                 list_string += line
         index += 1
