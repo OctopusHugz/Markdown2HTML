@@ -30,6 +30,22 @@ def write_ol_list(my_list):
     return full_list_string
 
 
+def write_p_lines(p_lines):
+    list_string = "<p>"
+    list_closing_tag = "</p>"
+    index = 0
+    for line in p_lines:
+        if len(p_lines) == 1:
+            list_string += line
+        else:
+            if index != len(p_lines) - 1:
+                list_string += line + " <br/> "
+            else:
+                list_string += line
+        index += 1
+    full_list_string = list_string + list_closing_tag
+    return full_list_string
+
 if __name__ == "__main__":
     from sys import argv, exit, stderr
     from os import path
@@ -51,6 +67,7 @@ if __name__ == "__main__":
     ul_elems = 0
     ol_elems = 0
     index = 0
+    p_lines = []
     with open(argv[2], "w") as f:
         for line in file_content:
             line_content = line.split()
@@ -95,7 +112,20 @@ if __name__ == "__main__":
                 ol_flag = 0
                 f.write(line)
             else:
-                f.write(line)
+                if line != "\n":
+                    p_lines.append(line.strip("\n"))
+                    # if index + 1 < len(file_content) and \
+                    #         file_content[index + 1] == "\n":
+                    #     file_content[index + 1] = "</p>"
+                    #     f.write(write_p_lines(p_lines))
+                    #     p_lines = []
+                else:
+                    f.write(write_p_lines(p_lines))
+                    p_lines = []
+                # if index + 1 < len(file_content) and \
+                #         file_content[index + 1] != "\n":
+                #     file_content[index] += "</ br>"
+                #     f.write(write_p_lines(p_lines))
             if index == len(file_content) - 1:
                 if ul_flag > 0:
                     f.write(write_ul_list(ul_items.get(ul_elems)))
@@ -103,4 +133,12 @@ if __name__ == "__main__":
                 elif ol_flag > 0:
                     f.write(write_ol_list(ol_items.get(ol_elems)))
                     f.write("\n")
+                elif len(p_lines) > 0:
+                    # print("End of array and we have p_lines!")
+                    f.write(write_p_lines(p_lines))
+                    # f.write("<p>")
+                    # for line in p_lines:
+                    #     if line != "\n":
+                    #         if file_content[index + 1] == "\n":
+                    #             f.write(line + "</p>")
             index += 1
