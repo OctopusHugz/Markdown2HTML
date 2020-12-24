@@ -39,7 +39,7 @@ def write_p_lines(p_lines):
             list_string += line
         else:
             if index != len(p_lines) - 1:
-                list_string += line + "<br/>\n"
+                list_string += line + "<br />\n"
             else:
                 list_string += line
         index += 1
@@ -121,8 +121,9 @@ if __name__ == "__main__":
                     #     f.write(write_p_lines(p_lines))
                     #     p_lines = []
                 else:
-                    f.write(write_p_lines(p_lines))
-                    p_lines = []
+                    if len(p_lines) > 0:
+                        f.write(write_p_lines(p_lines))
+                        p_lines = []
                 # if index + 1 < len(file_content) and \
                 #         file_content[index + 1] != "\n":
                 #     file_content[index] += "</ br>"
