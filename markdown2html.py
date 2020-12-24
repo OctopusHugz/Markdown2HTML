@@ -18,6 +18,8 @@ def write_ul_list(my_list):
     for li in my_list:
         list_string += "<li>" + " ".join(li) + "</li>"
     full_list_string = list_string + list_closing_tag
+    full_list_string = full_list_string.replace("**", "<b>", 1)
+    full_list_string = full_list_string.replace("**", "</b>", 1)
     return full_list_string
 
 
@@ -27,6 +29,8 @@ def write_ol_list(my_list):
     for li in my_list:
         list_string += "<li>" + " ".join(li) + "</li>"
     full_list_string = list_string + list_closing_tag
+    full_list_string = full_list_string.replace("**", "<b>", 1)
+    full_list_string = full_list_string.replace("**", "</b>", 1)
     return full_list_string
 
 
@@ -98,7 +102,7 @@ if __name__ == "__main__":
                 ul_li_list = []
                 ul_flag = 0
                 f.write(line)
-            elif line[0] == "*" and ol_flag >= 0:
+            elif line[0] == "*" and line[1] != "*" and ol_flag >= 0:
                 ol_flag += 1
                 ol_li_list.append(line_content[1:])
                 ol_items.update({ol_elems: ol_li_list})
@@ -111,6 +115,10 @@ if __name__ == "__main__":
                 f.write(line)
             else:
                 if line != "\n":
+                    line = line.replace("**", "<b>", 1)
+                    line = line.replace("**", "</b>", 1)
+                    line = line.replace("__", "<em>", 1)
+                    line = line.replace("__", "</em>", 1)
                     p_lines.append(line)
                 else:
                     if len(p_lines) > 0:
