@@ -11,6 +11,28 @@ def write_headers(line_content, header_level):
     element_text_string = element_text_string.replace("**", "</b>", 1)
     element_text_string = element_text_string.replace("__", "<em>", 1)
     element_text_string = element_text_string.replace("__", "</em>", 1)
+    if "((" in element_text_string and "))" in element_text_string:
+        starting_index = element_text_string.index("((")
+        ending_index = element_text_string.index("))")
+        strip_c_string = element_text_string[starting_index + 2:ending_index]
+        strings = element_text_string.split(strip_c_string)
+        strings[0] = strings[0].replace("((", "")
+        strings[1] = strings[1].replace("))", "")
+        strip_c_string = strip_c_string.replace("c", "")
+        strip_c_string = strip_c_string.replace("C", "")
+        strip_c_string = strip_c_string.replace("((", "")
+        strip_c_string = strip_c_string.replace("))", "")
+        element_text_string = strings[0] + strip_c_string + strings[1]
+    if "[[" in element_text_string and "]]" in element_text_string:
+        starting_index = element_text_string.index("[[")
+        ending_index = element_text_string.index("]]")
+        md5_string = element_text_string[starting_index + 2:ending_index]
+        strings = element_text_string.split(md5_string)
+        strings[0] = strings[0].replace("[[", "")
+        strings[1] = strings[1].replace("]]", "")
+        hash_obj = md5(md5_string.encode())
+        hashed_string = hash_obj.hexdigest()
+        element_text_string = strings[0] + hashed_string + strings[1]
     full_element_string = header_tag + element_text_string + \
         closing_header_tag + "\n"
     return full_element_string
@@ -28,6 +50,28 @@ def write_ul_list(my_list):
     if full_list_string.count("__") == 2:
         full_list_string = full_list_string.replace("__", "<em>", 1)
         full_list_string = full_list_string.replace("__", "</em>", 1)
+    if "((" in full_list_string and "))" in full_list_string:
+        starting_index = full_list_string.index("((")
+        ending_index = full_list_string.index("))")
+        strip_c_string = full_list_string[starting_index + 2:ending_index]
+        strings = full_list_string.split(strip_c_string)
+        strings[0] = strings[0].replace("((", "")
+        strings[1] = strings[1].replace("))", "")
+        strip_c_string = strip_c_string.replace("c", "")
+        strip_c_string = strip_c_string.replace("C", "")
+        strip_c_string = strip_c_string.replace("((", "")
+        strip_c_string = strip_c_string.replace("))", "")
+        full_list_string = strings[0] + strip_c_string + strings[1]
+    if "[[" in full_list_string and "]]" in full_list_string:
+        starting_index = full_list_string.index("[[")
+        ending_index = full_list_string.index("]]")
+        md5_string = full_list_string[starting_index + 2:ending_index]
+        strings = full_list_string.split(md5_string)
+        strings[0] = strings[0].replace("[[", "")
+        strings[1] = strings[1].replace("]]", "")
+        hash_obj = md5(md5_string.encode())
+        hashed_string = hash_obj.hexdigest()
+        full_list_string = strings[0] + hashed_string + strings[1]
     return full_list_string
 
 
@@ -43,6 +87,28 @@ def write_ol_list(my_list):
     if full_list_string.count("__") == 2:
         full_list_string = full_list_string.replace("__", "<em>", 1)
         full_list_string = full_list_string.replace("__", "</em>", 1)
+    if "((" in full_list_string and "))" in full_list_string:
+        starting_index = full_list_string.index("((")
+        ending_index = full_list_string.index("))")
+        strip_c_string = full_list_string[starting_index + 2:ending_index]
+        strings = full_list_string.split(strip_c_string)
+        strings[0] = strings[0].replace("((", "")
+        strings[1] = strings[1].replace("))", "")
+        strip_c_string = strip_c_string.replace("c", "")
+        strip_c_string = strip_c_string.replace("C", "")
+        strip_c_string = strip_c_string.replace("((", "")
+        strip_c_string = strip_c_string.replace("))", "")
+        full_list_string = strings[0] + strip_c_string + strings[1]
+    if "[[" in full_list_string and "]]" in full_list_string:
+        starting_index = full_list_string.index("[[")
+        ending_index = full_list_string.index("]]")
+        md5_string = full_list_string[starting_index + 2:ending_index]
+        strings = full_list_string.split(md5_string)
+        strings[0] = strings[0].replace("[[", "")
+        strings[1] = strings[1].replace("]]", "")
+        hash_obj = md5(md5_string.encode())
+        hashed_string = hash_obj.hexdigest()
+        full_list_string = strings[0] + hashed_string + strings[1]
     return full_list_string
 
 
