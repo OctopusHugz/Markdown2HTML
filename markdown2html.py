@@ -168,6 +168,10 @@ if __name__ == "__main__":
                 strip_c_string = strip_c_string.replace("((", "")
                 strip_c_string = strip_c_string.replace("))", "")
                 c_less_string = strings[0] + strip_c_string + strings[1]
+                c_less_string = c_less_string.replace("**", "<b>", 1)
+                c_less_string = c_less_string.replace("**", "</b>", 1)
+                c_less_string = c_less_string.replace("__", "<em>", 1)
+                c_less_string = c_less_string.replace("__", "</em>", 1)
                 p_lines.append(c_less_string)
             elif "[[" in line and "]]" in line:
                 starting_index = line.index("[[")
