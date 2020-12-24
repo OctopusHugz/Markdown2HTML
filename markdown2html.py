@@ -31,15 +31,15 @@ def write_ol_list(my_list):
 
 
 def write_p_lines(p_lines):
-    list_string = "<p>"
-    list_closing_tag = "</p>"
+    list_string = "<p>\n"
+    list_closing_tag = "</p>\n"
     index = 0
     for line in p_lines:
         if len(p_lines) == 1:
             list_string += line
         else:
             if index != len(p_lines) - 1:
-                list_string += line + "<br/>"
+                list_string += line + "<br/>\n"
             else:
                 list_string += line
         index += 1
@@ -114,7 +114,7 @@ if __name__ == "__main__":
                 f.write(line)
             else:
                 if line != "\n":
-                    p_lines.append(line.strip("\n"))
+                    p_lines.append(line)
                     # if index + 1 < len(file_content) and \
                     #         file_content[index + 1] == "\n":
                     #     file_content[index + 1] = "</p>"
