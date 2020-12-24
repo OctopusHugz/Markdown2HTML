@@ -7,6 +7,10 @@ def write_headers(line_content, header_level):
     closing_header_tag = "</h" + str(header_level) + ">"
     element_text = line_content[1:]
     element_text_string = " ".join(element_text)
+    element_text_string = element_text_string.replace("**", "<b>", 1)
+    element_text_string = element_text_string.replace("**", "</b>", 1)
+    element_text_string = element_text_string.replace("__", "<em>", 1)
+    element_text_string = element_text_string.replace("__", "</em>", 1)
     full_element_string = header_tag + element_text_string + \
         closing_header_tag + "\n"
     return full_element_string
