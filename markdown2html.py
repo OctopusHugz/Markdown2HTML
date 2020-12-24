@@ -119,18 +119,29 @@ if __name__ == "__main__":
                 ol_flag = 0
                 f.write(line)
             elif "((" in line and "))" in line:
-                line = line.replace("c", "")
-                line = line.replace("C", "")
-                line = line.replace("((", "")
-                line = line.replace("))", "")
-                p_lines.append(line)
+                starting_index = line.index("((")
+                ending_index = line.index("))")
+                strip_c_string = line[starting_index + 2:ending_index]
+                strings = line.split(strip_c_string)
+                strings[0] = strings[0].replace("((", "")
+                strings[1] = strings[1].replace("))", "")
+                strip_c_string = strip_c_string.replace("c", "")
+                strip_c_string = strip_c_string.replace("C", "")
+                strip_c_string = strip_c_string.replace("((", "")
+                strip_c_string = strip_c_string.replace("))", "")
+                c_less_string = strings[0] + strip_c_string + strings[1]
+                p_lines.append(c_less_string)
             elif "[[" in line and "]]" in line:
-                line = line.replace("[[", "")
-                line = line.replace("]]", "")
-                hash_obj = md5(line.encode())
-                hashed_string = hash_obj.hexdigest() + "\n"
-                # print(hashed_string)
-                p_lines.append(hashed_string)
+                starting_index = line.index("[[")
+                ending_index = line.index("]]")
+                md5_string = line[starting_index + 2:ending_index]
+                strings = line.split(md5_string)
+                strings[0] = strings[0].replace("[[", "")
+                strings[1] = strings[1].replace("]]", "")
+                hash_obj = md5(md5_string.encode())
+                hashed_string = hash_obj.hexdigest()
+                full_hashed_string = strings[0] + hashed_string + strings[1]
+                p_lines.append(full_hashed_string)
             else:
                 if line != "\n":
                     line = line.replace("**", "<b>", 1)
