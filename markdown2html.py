@@ -20,6 +20,8 @@ def write_ul_list(my_list):
     full_list_string = list_string + list_closing_tag
     full_list_string = full_list_string.replace("**", "<b>", 1)
     full_list_string = full_list_string.replace("**", "</b>", 1)
+    full_list_string = full_list_string.replace("__", "<em>", 1)
+    full_list_string = full_list_string.replace("__", "</em>", 1)
     return full_list_string
 
 
@@ -31,6 +33,8 @@ def write_ol_list(my_list):
     full_list_string = list_string + list_closing_tag
     full_list_string = full_list_string.replace("**", "<b>", 1)
     full_list_string = full_list_string.replace("**", "</b>", 1)
+    full_list_string = full_list_string.replace("__", "<em>", 1)
+    full_list_string = full_list_string.replace("__", "</em>", 1)
     return full_list_string
 
 
