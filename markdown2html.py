@@ -73,9 +73,6 @@ if __name__ == "__main__":
         for line in file_content:
             line_content = line.split()
             header_level = line.count("#")
-            # print("\nline is: {}".format(line))
-            # print("line[0] is: {}".format(line[0]))
-            # print("ul_flag is: {}".format(ul_flag))
             if header_level != 0:
                 if ul_flag > 0:
                     f.write(write_ul_list(ul_items.get(ul_elems)))
@@ -115,19 +112,10 @@ if __name__ == "__main__":
             else:
                 if line != "\n":
                     p_lines.append(line)
-                    # if index + 1 < len(file_content) and \
-                    #         file_content[index + 1] == "\n":
-                    #     file_content[index + 1] = "</p>"
-                    #     f.write(write_p_lines(p_lines))
-                    #     p_lines = []
                 else:
                     if len(p_lines) > 0:
                         f.write(write_p_lines(p_lines))
                         p_lines = []
-                # if index + 1 < len(file_content) and \
-                #         file_content[index + 1] != "\n":
-                #     file_content[index] += "</ br>"
-                #     f.write(write_p_lines(p_lines))
             if index == len(file_content) - 1:
                 if ul_flag > 0:
                     f.write(write_ul_list(ul_items.get(ul_elems)))
@@ -136,11 +124,5 @@ if __name__ == "__main__":
                     f.write(write_ol_list(ol_items.get(ol_elems)))
                     f.write("\n")
                 elif len(p_lines) > 0:
-                    # print("End of array and we have p_lines!")
                     f.write(write_p_lines(p_lines))
-                    # f.write("<p>")
-                    # for line in p_lines:
-                    #     if line != "\n":
-                    #         if file_content[index + 1] == "\n":
-                    #             f.write(line + "</p>")
             index += 1
