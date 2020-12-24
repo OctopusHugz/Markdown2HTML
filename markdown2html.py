@@ -20,7 +20,22 @@ def write_ul_list(my_list):
     list_string = "<ul>"
     list_closing_tag = "</ul>"
     for li in my_list:
-        list_string += "<li>" + " ".join(li) + "</li>"
+        for li_string in li:
+            if "[[" in li_string and "]]" in li_string:
+                starting_index = li_string.index("[[")
+                ending_index = li_string.index("]]")
+                md5_string = li_string[starting_index + 2:ending_index]
+                strings = li_string.split(md5_string)
+                strings[0] = strings[0].replace("[[", "")
+                strings[1] = strings[1].replace("]]", "")
+                hash_obj = md5(md5_string.encode())
+                hashed_string = hash_obj.hexdigest()
+                li_string = strings[0] + hashed_string + strings[1]
+                li = list(li_string)
+        if len(li) != 32:
+            list_string += "<li>" + " ".join(li) + "</li>"
+        else:
+            list_string += "<li>" + "".join(li) + "</li>"
     full_list_string = list_string + list_closing_tag
     if full_list_string.count("**") == 2:
         full_list_string = full_list_string.replace("**", "<b>", 1)
@@ -35,7 +50,22 @@ def write_ol_list(my_list):
     list_string = "<ol>"
     list_closing_tag = "</ol>"
     for li in my_list:
-        list_string += "<li>" + " ".join(li) + "</li>"
+        for li_string in li:
+            if "[[" in li_string and "]]" in li_string:
+                starting_index = li_string.index("[[")
+                ending_index = li_string.index("]]")
+                md5_string = li_string[starting_index + 2:ending_index]
+                strings = li_string.split(md5_string)
+                strings[0] = strings[0].replace("[[", "")
+                strings[1] = strings[1].replace("]]", "")
+                hash_obj = md5(md5_string.encode())
+                hashed_string = hash_obj.hexdigest()
+                li_string = strings[0] + hashed_string + strings[1]
+                li = list(li_string)
+        if len(li) != 32:
+            list_string += "<li>" + " ".join(li) + "</li>"
+        else:
+            list_string += "<li>" + "".join(li) + "</li>"
     full_list_string = list_string + list_closing_tag
     if full_list_string.count("**") == 2:
         full_list_string = full_list_string.replace("**", "<b>", 1)
