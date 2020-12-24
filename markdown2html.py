@@ -148,6 +148,10 @@ if __name__ == "__main__":
                     line = line.replace("**", "</b>", 1)
                     line = line.replace("__", "<em>", 1)
                     line = line.replace("__", "</em>", 1)
+                    line = line.replace("**", "<b>", 1)
+                    line = line.replace("**", "</b>", 1)
+                    line = line.replace("__", "<em>", 1)
+                    line = line.replace("__", "</em>", 1)
                     p_lines.append(line)
                 else:
                     if len(p_lines) > 0:
