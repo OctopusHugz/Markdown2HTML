@@ -22,10 +22,6 @@ def write_ul_list(my_list):
     full_list_string = full_list_string.replace("**", "</b>", 1)
     full_list_string = full_list_string.replace("__", "<em>", 1)
     full_list_string = full_list_string.replace("__", "</em>", 1)
-    full_list_string = full_list_string.replace("**", "<b>", 1)
-    full_list_string = full_list_string.replace("**", "</b>", 1)
-    full_list_string = full_list_string.replace("__", "<em>", 1)
-    full_list_string = full_list_string.replace("__", "</em>", 1)
     return full_list_string
 
 
@@ -35,10 +31,6 @@ def write_ol_list(my_list):
     for li in my_list:
         list_string += "<li>" + " ".join(li) + "</li>"
     full_list_string = list_string + list_closing_tag
-    full_list_string = full_list_string.replace("**", "<b>", 1)
-    full_list_string = full_list_string.replace("**", "</b>", 1)
-    full_list_string = full_list_string.replace("__", "<em>", 1)
-    full_list_string = full_list_string.replace("__", "</em>", 1)
     full_list_string = full_list_string.replace("**", "<b>", 1)
     full_list_string = full_list_string.replace("**", "</b>", 1)
     full_list_string = full_list_string.replace("__", "<em>", 1)
@@ -66,6 +58,7 @@ def write_p_lines(p_lines):
 if __name__ == "__main__":
     from sys import argv, exit, stderr
     from os import path
+    from hashlib import md5
 
     if len(argv) < 3:
         print("Usage: ./markdown2html.py README.md README.html", file=stderr)
@@ -125,6 +118,19 @@ if __name__ == "__main__":
                 ol_li_list = []
                 ol_flag = 0
                 f.write(line)
+            elif "((" in line and "))" in line:
+                line = line.replace("c", "")
+                line = line.replace("C", "")
+                line = line.replace("((", "")
+                line = line.replace("))", "")
+                p_lines.append(line)
+            elif "[[" in line and "]]" in line:
+                line = line.replace("[[", "")
+                line = line.replace("]]", "")
+                hash_obj = md5(line.encode())
+                hashed_string = hash_obj.hexdigest() + "\n"
+                # print(hashed_string)
+                p_lines.append(hashed_string)
             else:
                 if line != "\n":
                     line = line.replace("**", "<b>", 1)
